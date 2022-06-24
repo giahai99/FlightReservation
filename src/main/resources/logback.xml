@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<property name="LOG_DIR" value="E:/springboot-folder/log/"/>
+<property name="FILE_PREFIX" value="flightreservation"/>
+
+<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<file>${LOG_DIR}/${FILE_PREFIX}.log</file>
+<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+<Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>
+</encoder>
+
+<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+
+</rollingPolicy>
+</appender>
+
+</configuration>
