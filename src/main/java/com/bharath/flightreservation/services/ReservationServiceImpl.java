@@ -1,6 +1,5 @@
 package com.bharath.flightreservation.services;
 
-import com.bharath.flightreservation.controllers.ReservationController;
 import com.bharath.flightreservation.util.EmailUtil;
 import com.bharath.flightreservation.util.PDFGenerator;
 import org.slf4j.Logger;
@@ -16,6 +15,8 @@ import com.bharath.flightreservation.entities.Reservation;
 import com.bharath.flightreservation.repos.FlightRepository;
 import com.bharath.flightreservation.repos.PassengerRepository;
 import com.bharath.flightreservation.repos.ReservationRepository;
+
+import javax.transaction.Transactional;
 
 @Service
 public class  ReservationServiceImpl implements ReservationService {
@@ -41,6 +42,7 @@ public class  ReservationServiceImpl implements ReservationService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
 	@Override
+	@Transactional
 	public Reservation bookFlight(ReservationRequest request) {
 
 		LOGGER.info("Inside bookFlight()");

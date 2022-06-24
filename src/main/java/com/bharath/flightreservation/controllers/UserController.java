@@ -1,5 +1,6 @@
 package com.bharath.flightreservation.controllers;
 
+import com.bharath.flightreservation.services.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	private SecurityService securityService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
@@ -49,16 +53,17 @@ public class UserController {
 	public String login(@RequestParam("email") String email,@RequestParam("password") String password,
 			ModelMap modelMap) {
 		LOGGER.info("Inside Login() and the email is: "+email);
-
-		User user = userRepository.findByEmail(email);
-		if (user.getPassword().equals(password)) {
+//		User user = userRepository.findByEmail(email);
+		boolean loginResponse = securityService.login(email, password);
+//		if (user.getPassword().equals(password)) {
+		if (loginResponse) {
 			return "findFlights";
 		} else {
 			modelMap.addAttribute("msg", "Invalid user name or password. Please try again.");
 		}
 		
-		
 		return "login/login";
+
 	}
 	
 	
